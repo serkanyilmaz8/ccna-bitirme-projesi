@@ -1,4 +1,6 @@
 # 🌐 Kurumsal Ağ Tasarımı ve Uygulaması (CCNA Bitirme Projesi)
+<img width="1423" height="463" alt="bitirme-projesi-resim" src="https://github.com/user-attachments/assets/72343866-081c-4232-b5cc-b5d77e8b4411" />
+
 
 Bu proje, **Cisco Packet Tracer** kullanılarak tasarlanmış; Merkez (BİM) ve iki şube (A Blok, B Blok) yapısından oluşan kapsamlı bir kurumsal ağ simülasyonudur. Proje; anahtarlama (switching), yönlendirme (routing), kablosuz ağ (wireless), güvenlik ve servis yapılandırmalarını içermektedir.
 
