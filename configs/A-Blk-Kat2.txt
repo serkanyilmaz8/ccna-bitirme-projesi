@@ -1,0 +1,53 @@
+enable
+conf t
+host A-Blk-Kat2
+!
+vtp mode client
+vtp domain sinan
+vtp password cisco
+!
+interface gigabitEthernet 0/1
+switchport mode trunk
+no shutdown
+exit
+!
+interface range fastEthernet 0/1-10
+switchport mode access
+switchport access vlan 10
+spanning-tree portfast
+no shutdown
+exit
+!
+interface range fastEthernet 0/11-20
+switchport mode access
+switchport access vlan 11
+spanning-tree portfast
+no shutdown
+exit
+!
+interface gigabitEthernet 0/2
+description AP-2-Baglantisi
+switchport mode access
+switchport access vlan 19
+no shutdown
+exit
+!
+interface vlan 19
+ip address 192.168.19.4 255.255.255.0
+no shutdown
+exit
+ip default-gateway 192.168.19.1
+!
+enab sec cisco
+ip domain-name cisco
+service password-encryption
+crypto key generate rsa
+1024
+username sinan pas cisco
+line vty 0 4
+login local
+transport input all
+exit
+ip ssh version 2
+ip ssh authentication-retries 4
+ip ssh time-out 30

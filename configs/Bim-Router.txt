@@ -1,0 +1,65 @@
+enable
+conf t
+host Bim-Router
+!
+interface gigabitEthernet 0/0
+ip address 1.1.1.1 255.255.255.252
+no shutdown
+exit
+!
+interface gigabitEthernet 0/2
+ip address 1.1.1.5 255.255.255.252
+no shutdown
+exit
+!
+interface gigabitEthernet 0/1
+no shutdown
+exit
+!
+interface gigabitEthernet 0/1.20
+encapsulation dot1q 20
+ip address 192.168.20.1 255.255.255.0
+exit
+!
+interface gigabitEthernet 0/1.21
+encapsulation dot1q 21
+ip address 192.168.21.1 255.255.255.0
+exit
+!
+interface gigabitEthernet 0/1.22
+encapsulation dot1q 22
+ip address 192.168.22.1 255.255.255.0
+ip helper-address 192.168.21.2
+exit
+!
+interface gigabitEthernet 0/1.29
+encapsulation dot1q 29
+ip address 192.168.29.1 255.255.255.0
+ip helper-address 192.168.21.2
+exit
+!
+router ospf 100
+network 192.168.20.0 0.0.0.255 area 0
+network 192.168.21.0 0.0.0.255 area 0
+network 192.168.22.0 0.0.0.255 area 0
+network 192.168.29.0 0.0.0.255 area 0
+network 1.1.1.0 0.0.0.3 area 0
+network 1.1.1.4 0.0.0.3 area 0
+exit
+!
+logging host 192.168.20.2
+logging trap debugging
+!
+enab sec cisco
+ip domain-name cisco
+service password-encryption
+crypto key generate rsa
+1024
+username sinan pas cisco
+line vty 0 4
+login local
+transport input all
+exit
+ip ssh version 2
+ip ssh authentication-retries 4
+ip ssh time-out 30

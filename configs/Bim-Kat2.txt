@@ -1,0 +1,56 @@
+enable
+conf t
+host Bim-Kat2
+!
+vtp mode client
+vtp domain sinan
+vtp pass cisco
+!
+interface gigabitEthernet 1/0/1
+switchport mode trunk
+no shutdown
+exit
+!
+interface gigabitEthernet 1/0/3
+description SYSLOG-Server
+switchport mode access
+switchport access vlan 20
+spanning-tree portfast
+no shutdown
+exit
+!
+interface gigabitEthernet 1/0/5
+description AP-2
+switchport mode access
+switchport access vlan 29
+spanning-tree portfast
+no shutdown
+exit
+!
+interface gigabitEthernet 1/0/2
+description DNS-WEB-Server
+switchport mode access
+switchport access vlan 20
+spanning-tree portfast
+no shutdown
+exit
+!
+interface vlan 29
+ip address 192.168.29.4 255.255.255.0
+no shutdown
+exit
+ip default-gateway 192.168.29.1
+!
+enab sec cisco
+ip domain-name cisco
+service password-encryption
+crypto key generate rsa
+1024
+username sinan pas cisco
+line vty 0 4
+login local
+transport input all
+exit
+ip ssh version 2
+ip ssh authentication-retries 4
+ip ssh time-out 30
